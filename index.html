@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夢のマイホーム予算シミュレーター</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>夢のマイホーム予算シミュレーター</h1>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <form id="propertyForm">
+                    <div class="input-methods">
+                        <!-- 方法1: 予算から検索 -->
+                        <div class="input-method budget-method">
+                            <div class="method-header">
+                                <div class="method-number">A</div>
+                                <div class="method-title">予算から計算</div>
+                            </div>
+                            <div class="method-content">
+                                <div class="budget-input-group">
+                                    <label for="budget">予算</label>
+                                    <input type="number" id="budget" name="budget" placeholder="3000">
+                                    <span class="unit">万円</span>
+                                </div>
+                                <div class="budget-buttons">
+                                    <button type="button" class="budget-btn" data-amount="4000">4000万</button>
+                                    <button type="button" class="budget-btn" data-amount="6000">6000万</button>
+                                    <button type="button" class="budget-btn" data-amount="8000">8000万</button>
+                                    <button type="button" class="budget-btn" data-amount="10000">1億</button>
+                                    <button type="button" class="budget-btn" data-amount="12000">1.2億</button>
+                                    <button type="button" class="budget-btn" data-amount="15000">1.5億</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 方法2: 月々の返済額から検索 -->
+                        <div class="input-method monthly-method">
+                            <div class="method-header">
+                                <div class="method-number">B</div>
+                                <div class="method-title">月々の返済額から計算</div>
+                            </div>
+                            <div class="method-content">
+                                <div class="monthly-input-group">
+                                    <label for="monthlyPayment">月々の返済額</label>
+                                    <input type="number" id="monthlyPayment" name="monthlyPayment" placeholder="10">
+                                    <span class="unit">万円</span>
+                                </div>
+                                <div class="calculation-note">
+                                    <small>※ 金利1.0%、35年ローンで計算</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 方法3: 面積・坪単価から検索 -->
+                        <div class="input-method area-method">
+                            <div class="method-header">
+                                <div class="method-number">C</div>
+                                <div class="method-title">面積・坪単価から計算</div>
+                            </div>
+                            <div class="method-content">
+                                <div class="area-inputs">
+                                    <div class="area-input-group">
+                                        <label for="squareMeters">平米数</label>
+                                        <input type="number" id="squareMeters" name="squareMeters" value="70" placeholder="70">
+                                        <span class="unit">m²</span>
+                                    </div>
+                                    <div class="area-input-group">
+                                        <label for="tsuboSize">坪数</label>
+                                        <input type="number" id="tsuboSize" name="tsuboSize" step="0.1" placeholder="21.2">
+                                        <span class="unit">坪</span>
+                                    </div>
+                                    <div class="area-input-group">
+                                        <label for="pricePerTsubo">坪単価</label>
+                                        <input type="number" id="pricePerTsubo" name="pricePerTsubo" placeholder="80">
+                                        <span class="unit">万円</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <!-- ローン条件（小さめ） -->
+                <div class="loan-conditions">
+                    <div class="condition-inputs">
+                        <div class="condition-item">
+                            <label for="loanPeriod">ローン期間</label>
+                            <div class="condition-input">
+                                <input type="number" id="loanPeriod" name="loanPeriod" value="35" min="1" max="50">
+                                <span>年</span>
+                            </div>
+                        </div>
+                        <div class="condition-item">
+                            <label for="downPayment">頭金</label>
+                            <div class="condition-input">
+                                <input type="number" id="downPayment" name="downPayment" value="0" min="0">
+                                <span>万円</span>
+                            </div>
+                        </div>
+                        <div class="condition-item">
+                            <label for="propertyType">物件タイプ</label>
+                            <div class="condition-input">
+                                <select id="propertyType" name="propertyType">
+                                    <option value="new-mansion">新築マンション</option>
+                                    <option value="existing">中古物件</option>
+                                    <option value="new-house">新築一戸建て</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="condition-item loan-type-item">
+                            <label for="loanType">ローンタイプ</label>
+                            <div class="condition-input loan-type-input">
+                                <select id="loanType" name="loanType">
+                                    <option value="single">単独ローン</option>
+                                    <option value="pair">ペアローン</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="condition-summary">
+                            <div class="condition-value">
+                                <span>購入価格:</span>
+                                <span id="purchasePriceCondition">-</span>
+                            </div>
+                            <div class="condition-value">
+                                <span>借入価格:</span>
+                                <span id="loanAmountCondition">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ペアローン設定 -->
+                    <div class="pair-loan-settings" id="pairLoanSettings" style="display: none;">
+                        <div class="pair-loan-header">
+                            <h4>ペアローン借入割合</h4>
+                            <span class="pair-loan-note">夫婦それぞれが個別にローンを組みます</span>
+                        </div>
+                        <div class="pair-loan-controls">
+                            <div class="pair-loan-item">
+                                <label for="husbandRatio">夫の借入割合</label>
+                                <div class="pair-ratio-input">
+                                    <input type="number" id="husbandRatio" value="60" min="0" max="100" step="5">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                            <div class="pair-loan-item">
+                                <label for="wifeRatio">妻の借入割合</label>
+                                <div class="pair-ratio-input">
+                                    <input type="number" id="wifeRatio" value="40" min="0" max="100" step="5">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 最重要：月々の返済額比較 -->
+                <div class="main-results">
+                    <div class="payment-comparison">
+                        <div class="payment-card variable-card">
+                            <div class="payment-header">
+                                <div class="rate-type">変動金利</div>
+                                <div class="rate-value">
+                                    <input type="number" id="variableRate" value="0.8" step="0.01" min="0" max="10">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                            <div class="variable-simulation">
+                                <div class="simulation-controls">
+                                    <div class="simulation-row">
+                                        <label for="variableScenario">変動シナリオ:</label>
+                                        <select id="variableScenario">
+                                            <option value="fixed">固定</option>
+                                            <option value="gradual-increase">段階的上昇</option>
+                                            <option value="sudden-increase">急激な上昇</option>
+                                            <option value="fluctuation">上下変動</option>
+                                        </select>
+                                    </div>
+                                    <div class="simulation-row simulation-details" id="simulationDetails" style="display: none;">
+                                        <label for="maxRate">最高金利:</label>
+                                        <input type="number" id="maxRate" value="3.0" step="0.1" min="0" max="10">
+                                        <span>%</span>
+                                    </div>
+                                </div>
+                                <div class="scenario-description" id="scenarioDescription">
+                                    金利固定でシミュレーション
+                                </div>
+                            </div>
+                            <div class="payment-amount">
+                                <div class="amount-main" id="variableMonthly">-</div>
+                                <div class="amount-sub" id="variableMonthlyJapanese">-</div>
+                            </div>
+                            <!-- ペアローン時の詳細表示 -->
+                            <div class="pair-loan-details" id="variablePairDetails" style="display: none;">
+                                <div class="pair-payment-row">
+                                    <span>夫:</span>
+                                    <span id="variableHusbandMonthly">-</span>
+                                </div>
+                                <div class="pair-payment-row">
+                                    <span>妻:</span>
+                                    <span id="variableWifeMonthly">-</span>
+                                </div>
+                            </div>
+                            <div class="payment-note" id="variablePaymentNote">一般的に最も低い金利</div>
+                        </div>
+
+                        <div class="payment-card fixed-card">
+                            <div class="payment-header">
+                                <div class="rate-type">固定金利</div>
+                                <div class="rate-value">
+                                    <input type="number" id="fixedRate" value="2.0" step="0.01" min="0" max="10">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                            <div class="payment-amount">
+                                <div class="amount-main" id="fixedMonthly">-</div>
+                                <div class="amount-sub" id="fixedMonthlyJapanese">-</div>
+                            </div>
+                            <!-- ペアローン時の詳細表示 -->
+                            <div class="pair-loan-details" id="fixedPairDetails" style="display: none;">
+                                <div class="pair-payment-row">
+                                    <span>夫:</span>
+                                    <span id="fixedHusbandMonthly">-</span>
+                                </div>
+                                <div class="pair-payment-row">
+                                    <span>妻:</span>
+                                    <span id="fixedWifeMonthly">-</span>
+                                </div>
+                            </div>
+                            <div class="payment-note">金利変動リスクなし</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 物件購入リンク -->
+                <div class="property-links-section">
+                    <div class="section-header">
+                        <h4>🏢 物件を探す</h4>
+                        <p class="section-subtitle">予算に合った物件を実際に検索してみましょう</p>
+                    </div>
+                    
+                    <div class="property-links-grid">
+                        <div class="property-link-card">
+                            <div class="prefecture-name">東京都</div>
+                            <a href="#" class="prefecture-link" data-prefecture="13">
+                                <span class="price-display" id="tokyoPrice">-</span>
+                                <span class="link-arrow">→</span>
+                            </a>
+                        </div>
+                        
+                        <div class="property-link-card">
+                            <div class="prefecture-name">神奈川県</div>
+                            <a href="#" class="prefecture-link" data-prefecture="14">
+                                <span class="price-display" id="kanagawaPrice">-</span>
+                                <span class="link-arrow">→</span>
+                            </a>
+                        </div>
+                        
+                        <div class="property-link-card">
+                            <div class="prefecture-name">埼玉県</div>
+                            <a href="#" class="prefecture-link" data-prefecture="11">
+                                <span class="price-display" id="saitamaPrice">-</span>
+                                <span class="link-arrow">→</span>
+                            </a>
+                        </div>
+                        
+                        <div class="property-link-card">
+                            <div class="prefecture-name">千葉県</div>
+                            <a href="#" class="prefecture-link" data-prefecture="12">
+                                <span class="price-display" id="chibaPrice">-</span>
+                                <span class="link-arrow">→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 返済総額推移 -->
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h3>返済総額推移比較</h3>
+                        <div class="chart-toggle">
+                            <button type="button" class="toggle-btn active" id="chartToggle" data-view="chart">返済総額推移</button>
+                            <button type="button" class="toggle-btn" id="dualToggle" data-view="dual">返済総額+年間返済額</button>
+                            <button type="button" class="toggle-btn" id="tableToggle" data-view="table">表で比較</button>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container" id="chartContainer">
+                        <canvas id="assetChart" width="800" height="300"></canvas>
+                    </div>
+                    
+                    <div class="table-container" id="tableContainer" style="display: none;">
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>年数</th>
+                                        <th>変動金利</th>
+                                        <th>固定金利</th>
+                                        <th>差額（変動-固定）</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="comparisonTableBody">
+                                    <!-- JavaScriptで動的に生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 詳細設定・詳細情報 -->
+                <div class="secondary-info">
+                    <!-- 取引にかかる手数料 -->
+                    <div class="transaction-fees">
+                        <div class="section-header">
+                            <h4>💰 取引にかかる手数料</h4>
+                            <p class="section-subtitle">不動産購入時に必要な各種手数料</p>
+                        </div>
+                        
+                        <div class="fees-content">
+                            <div class="fees-grid">
+                                <div class="fee-item">
+                                    <div class="fee-label">
+                                        <span>仲介手数料</span>
+                                        <small>(物件価格×3%+6万円)×1.1</small>
+                                    </div>
+                                    <div class="fee-value" id="brokerageFee">-</div>
+                                </div>
+                                <div class="fee-item">
+                                    <div class="fee-label">
+                                        <span>登録免許税</span>
+                                        <small>土地1.5%+建物0.3%(評価額)</small>
+                                    </div>
+                                    <div class="fee-value" id="registrationTax">-</div>
+                                </div>
+                                <div class="fee-item">
+                                    <div class="fee-label">
+                                        <span>司法書士報酬</span>
+                                        <small>約10-15万円</small>
+                                    </div>
+                                    <div class="fee-value" id="judicialScrivenerFee">-</div>
+                                </div>
+                                <div class="fee-item">
+                                    <div class="fee-label">
+                                        <span>不動産取得税</span>
+                                        <small>評価額×3%-120万円</small>
+                                    </div>
+                                    <div class="fee-value" id="propertyAcquisitionTax">-</div>
+                                </div>
+                                <div class="fee-item">
+                                    <div class="fee-label">
+                                        <span>印紙税</span>
+                                        <small>契約金額に応じて</small>
+                                    </div>
+                                    <div class="fee-value" id="stampTax">-</div>
+                                </div>
+                                <div class="fee-item">
+                                    <div class="fee-label">
+                                        <span>ローン関連費用</span>
+                                        <small>借入額2.2%+事務手数料5.5万円</small>
+                                    </div>
+                                    <div class="fee-value" id="loanFees">-</div>
+                                </div>
+                            </div>
+                            
+                            <div class="fees-summary">
+                                <div class="fee-item total-fee">
+                                    <div class="fee-label">
+                                        <span>手数料合計</span>
+                                        <small>上記費用の総額</small>
+                                    </div>
+                                    <div class="fee-value" id="totalFees">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右側のカラム：返済情報と維持費用 -->
+                    <div class="right-column">
+                        <!-- 詳細な返済情報 -->
+                        <div class="detailed-payments">
+                            <div class="section-header">
+                                <h4>📊 総返済額・利息詳細</h4>
+                                <p class="section-subtitle">金利タイプ別の返済シミュレーション</p>
+                            </div>
+                            
+                            <div class="payment-details-grid">
+                                <div class="payment-detail-card">
+                                    <h5>変動金利の場合</h5>
+                                    <div class="detail-items">
+                                        <div class="detail-row">
+                                            <span>総返済額</span>
+                                            <div class="detail-value">
+                                                <div class="value-main" id="variableTotal">-</div>
+                                                <div class="value-sub" id="variableTotalJapanese">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="detail-row interest-row">
+                                            <span>利息総額</span>
+                                            <div class="detail-value">
+                                                <div class="value-main" id="variableInterest">-</div>
+                                                <div class="value-sub" id="variableInterestJapanese">-</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="payment-detail-card">
+                                    <h5>固定金利の場合</h5>
+                                    <div class="detail-items">
+                                        <div class="detail-row">
+                                            <span>総返済額</span>
+                                            <div class="detail-value">
+                                                <div class="value-main" id="fixedTotal">-</div>
+                                                <div class="value-sub" id="fixedTotalJapanese">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="detail-row interest-row">
+                                            <span>利息総額</span>
+                                            <div class="detail-value">
+                                                <div class="value-main" id="fixedInterest">-</div>
+                                                <div class="value-sub" id="fixedInterestJapanese">-</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 維持費用 -->
+                        <div class="maintenance-costs-section">
+                            <div class="section-header">
+                                <h4>🏠 維持費用（年間）</h4>
+                                <p class="section-subtitle">物件保有にかかる年間コスト</p>
+                            </div>
+                            <div class="maintenance-costs-grid">
+                                <div class="maintenance-item">
+                                    <div class="maintenance-label">
+                                        <span>固定資産税</span>
+                                        <small>評価額×1.4%（新築軽減措置適用）</small>
+                                    </div>
+                                    <div class="maintenance-value" id="propertyTax">-</div>
+                                </div>
+                                <div class="maintenance-item">
+                                    <div class="maintenance-label">
+                                        <span>都市計画税</span>
+                                        <small>購入価格×0.3%</small>
+                                    </div>
+                                    <div class="maintenance-value" id="cityPlanningTax">-</div>
+                                </div>
+                                <div class="maintenance-item">
+                                    <div class="maintenance-label">
+                                        <span>火災保険料</span>
+                                        <small>年間5万円（目安）</small>
+                                    </div>
+                                    <div class="maintenance-value" id="fireInsurance">-</div>
+                                </div>
+                                <div class="maintenance-item">
+                                    <div class="maintenance-label">
+                                        <span>管理費・修繕積立金</span>
+                                        <small>年間30万円（目安）</small>
+                                    </div>
+                                    <div class="maintenance-value" id="maintenanceFee">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 売却シミュレーション -->
+                <div class="sale-simulation-section">
+                    <div class="section-header">
+                        <h4>🏠 売却シミュレーション</h4>
+                        <p class="section-subtitle">将来の売却を想定した資産価値の計算</p>
+                    </div>
+                    
+                    <div class="sale-simulation-form">
+                        <div class="sale-inputs">
+                            <div class="sale-input-group">
+                                <label for="saleYear">売却予定年</label>
+                                <div class="sale-input-wrapper">
+                                    <input type="number" id="saleYear" value="10" min="1" max="35">
+                                    <span>年後</span>
+                                </div>
+                            </div>
+                            <div class="sale-input-group">
+                                <label for="salePrice">売却予定価格</label>
+                                <div class="sale-input-wrapper">
+                                    <input type="number" id="salePrice" placeholder="3000">
+                                    <span>万円</span>
+                                </div>
+                                <div class="sale-price-buttons">
+                                    <button type="button" class="sale-price-btn" data-rate="-30">-30%</button>
+                                    <button type="button" class="sale-price-btn" data-rate="-20">-20%</button>
+                                    <button type="button" class="sale-price-btn" data-rate="-10">-10%</button>
+                                    <button type="button" class="sale-price-btn" data-rate="0">現在価格</button>
+                                    <button type="button" class="sale-price-btn" data-rate="10">+10%</button>
+                                    <button type="button" class="sale-price-btn" data-rate="20">+20%</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sale-results" id="saleResults" style="display: none;">
+                            <div class="sale-summary">
+                                <div class="sale-summary-grid">
+                                    <div class="sale-summary-item total-gain variable-result">
+                                        <div class="summary-label">実質利益/損失（変動金利）</div>
+                                        <div class="summary-value" id="variableTotalGainLoss">-</div>
+                                        <div class="summary-note" id="variableGainLossNote">-</div>
+                                    </div>
+                                    <div class="sale-summary-item total-gain fixed-result">
+                                        <div class="summary-label">実質利益/損失（固定金利）</div>
+                                        <div class="summary-value" id="fixedTotalGainLoss">-</div>
+                                        <div class="summary-note" id="fixedGainLossNote">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="sale-breakdown">
+                                <h5>詳細内訳</h5>
+                                <div class="sale-breakdown-grid">
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">
+                                            <span>売却価格</span>
+                                            <small>設定した売却価格</small>
+                                        </div>
+                                        <div class="breakdown-value" id="saleGrossPrice">-</div>
+                                    </div>
+                                    <div class="breakdown-item negative">
+                                        <div class="breakdown-label">
+                                            <span>売却手数料</span>
+                                            <small>仲介手数料+印紙税+その他費用</small>
+                                        </div>
+                                        <div class="breakdown-value" id="saleFees">-</div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">
+                                            <span>売却手取り</span>
+                                            <small>売却価格 - 売却手数料</small>
+                                        </div>
+                                        <div class="breakdown-value" id="saleNetPrice">-</div>
+                                    </div>
+                                    <div class="breakdown-item negative">
+                                        <div class="breakdown-label">
+                                            <span>残債額</span>
+                                            <small>売却時点でのローン残高</small>
+                                        </div>
+                                        <div class="breakdown-value" id="remainingLoan">-</div>
+                                    </div>
+                                    <div class="breakdown-item negative">
+                                        <div class="breakdown-label">
+                                            <span>これまでの返済額</span>
+                                            <small>月々返済額 × 経過月数</small>
+                                        </div>
+                                        <div class="breakdown-value" id="totalPaid">-</div>
+                                    </div>
+                                    <div class="breakdown-item negative sub-item">
+                                        <div class="breakdown-label">
+                                            <span>　├ 元本返済分</span>
+                                            <small>ローン元本の返済に充てられた部分</small>
+                                        </div>
+                                        <div class="breakdown-value" id="principalPaid">-</div>
+                                    </div>
+                                    <div class="breakdown-item negative sub-item">
+                                        <div class="breakdown-label">
+                                            <span>　└ 利息支払分</span>
+                                            <small>金利として支払った部分</small>
+                                        </div>
+                                        <div class="breakdown-value" id="interestPaid">-</div>
+                                    </div>
+                                    <div class="breakdown-item negative">
+                                        <div class="breakdown-label">
+                                            <span>購入時手数料</span>
+                                            <small>購入時の取引手数料合計</small>
+                                        </div>
+                                        <div class="breakdown-value" id="purchaseFees">-</div>
+                                    </div>
+                                    <div class="breakdown-item negative">
+                                        <div class="breakdown-label">
+                                            <span>維持費累計</span>
+                                            <small>年間維持費 × 経過年数</small>
+                                        </div>
+                                        <div class="breakdown-value" id="maintenanceTotal">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <h3>詳細情報</h3>
+                    
+                    <!-- 住宅の種類 -->
+                    <div class="detail-table">
+                        <h4>住宅の種類</h4>
+                        <p class="section-description">住宅ローン控除の借入限度額は住宅の種類により異なります</p>
+                        <div class="housing-type-grid">
+                            <div class="housing-type-option" data-type="energy-efficient">
+                                <div class="housing-type-content">
+                                    <input type="radio" id="energyEfficient" name="homeType" value="energy-efficient" checked>
+                                    <label for="energyEfficient">
+                                        <div class="housing-type-name">省エネ基準適合住宅</div>
+                                        <div class="housing-type-limit">借入限度額：4,000万円</div>
+                                        <div class="housing-type-period">控除期間：13年</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="housing-type-option" data-type="certified">
+                                <div class="housing-type-content">
+                                    <input type="radio" id="certified" name="homeType" value="certified">
+                                    <label for="certified">
+                                        <div class="housing-type-name">認定住宅</div>
+                                        <div class="housing-type-limit">借入限度額：5,000万円</div>
+                                        <div class="housing-type-period">控除期間：13年</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="housing-type-option" data-type="zeh">
+                                <div class="housing-type-content">
+                                    <input type="radio" id="zeh" name="homeType" value="zeh">
+                                    <label for="zeh">
+                                        <div class="housing-type-name">ZEH水準省エネ住宅</div>
+                                        <div class="housing-type-limit">借入限度額：4,500万円</div>
+                                        <div class="housing-type-period">控除期間：13年</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="housing-type-option" data-type="basic">
+                                <div class="housing-type-content">
+                                    <input type="radio" id="basic" name="homeType" value="basic">
+                                    <label for="basic">
+                                        <div class="housing-type-name">一般住宅</div>
+                                        <div class="housing-type-limit">借入限度額：2,000万円</div>
+                                        <div class="housing-type-period">控除期間：10年</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="housing-loan-deduction-info">
+                            <h5>住宅ローン控除の計算方法</h5>
+                            <div class="calculation-formula">
+                                <div class="formula-item">
+                                    <span class="formula-label">年間控除額</span>
+                                    <span class="formula-text">= min(年末残高 × 0.7%, 40万円)</span>
+                                </div>
+                                <div class="formula-item">
+                                    <span class="formula-label">控除総額</span>
+                                    <span class="formula-text">= 年間控除額 × 控除期間</span>
+                                </div>
+                            </div>
+                            <div class="calculation-result" id="housingLoanDeductionResult">
+                                <!-- 単独ローンの場合 -->
+                                <div class="result-summary" id="singleLoanDeduction">
+                                    <span class="result-label">住宅ローン控除総額</span>
+                                    <span class="result-value" id="deductionTotalAmount">-</span>
+                                </div>
+                                
+                                <!-- ペアローンの場合 -->
+                                <div class="pair-loan-deduction" id="pairLoanDeduction" style="display: none;">
+                                    <div class="pair-deduction-grid">
+                                        <div class="deduction-item husband-deduction">
+                                            <div class="deduction-header">
+                                                <span class="deduction-person">夫</span>
+                                                <span class="deduction-ratio" id="husbandDeductionRatio">60%</span>
+                                            </div>
+                                            <div class="deduction-amount">
+                                                <span class="deduction-value" id="husbandDeductionAmount">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="deduction-item wife-deduction">
+                                            <div class="deduction-header">
+                                                <span class="deduction-person">妻</span>
+                                                <span class="deduction-ratio" id="wifeDeductionRatio">40%</span>
+                                            </div>
+                                            <div class="deduction-amount">
+                                                <span class="deduction-value" id="wifeDeductionAmount">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="total-deduction">
+                                        <span class="total-label">控除総額</span>
+                                        <span class="total-value" id="pairDeductionTotal">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 税制優遇 -->
+                    <div class="detail-table">
+                        <h4>利用可能な税制優遇</h4>
+                        <ul id="taxBenefits">
+                            <li>住宅ローン控除：年末残高の0.7%を所得税から控除</li>
+                            <li>住宅取得等資金の贈与税非課税：最大1,000万円</li>
+                            <li>不動産取得税の軽減措置</li>
+                            <li>登録免許税の軽減措置</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
