@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO基本設定 -->
+    <title>PREMIUM MANSIONS CATALOG | 日本の美しいマンション</title>
+    <meta name="description" content="日本全国の美しい高級マンションを厳選してご紹介。洗練されたデザインと上質な住環境を兼ね備えた至極のレジデンスコレクション。">
+    <meta name="keywords" content="高級マンション,プレミアムマンション,美しいマンション,日本,レジデンス,タワーマンション,デザイナーズマンション">
+    
+    <!-- OGP設定 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PREMIUM MANSIONS CATALOG | 日本の美しいマンション">
+    <meta property="og:description" content="日本全国の美しい高級マンションを厳選してご紹介。洗練されたデザインと上質な住環境を兼ね備えた至極のレジデンスコレクション。">
+    <meta property="og:url" content="https://yourdomain.com/catalog/">
+    <meta property="og:site_name" content="PREMIUM MANSIONS CATALOG">
+    <meta property="og:image" content="https://yourdomain.com/catalog/og-image.png">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>PREMIUM MANSIONS</h1>
+                <p class="nav-subtitle">CATALOG</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#mansions" class="nav-link">マンション</a></li>
+                <li><a href="#features" class="nav-link">特集</a></li>
+                <li><a href="#about" class="nav-link">コンセプト</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Beautiful Living<br>
+                <span class="hero-subtitle">日本の美しいマンション</span>
+            </h1>
+            <p class="hero-description">
+                洗練されたデザインと上質な住環境を兼ね備えた<br>
+                至極のレジデンスコレクション
+            </p>
+            <a href="#mansions" class="hero-cta">コレクションを見る</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Premium Mansion Exterior" loading="lazy">
+        </div>
+    </section>
+
+    <!-- フィルターセクション -->
+    <section class="filter-section" id="mansions">
+        <div class="container">
+            <h2 class="section-title">マンションコレクション</h2>
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">すべて</button>
+                <button class="filter-tab" data-filter="tower">タワーマンション</button>
+                <button class="filter-tab" data-filter="designer">デザイナーズ</button>
+                <button class="filter-tab" data-filter="luxury">ラグジュアリー</button>
+                <button class="filter-tab" data-filter="vintage">ヴィンテージ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- マンション一覧 -->
+    <section class="mansions-grid">
+        <div class="container">
+            <div class="grid">
+                <!-- マンション1 -->
+                <article class="mansion-card" data-category="tower luxury">
+                    <div class="mansion-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tokyo Bay Residence" loading="lazy">
+                        <div class="mansion-badge">タワー</div>
+                    </div>
+                    <div class="mansion-info">
+                        <h3 class="mansion-name">Tokyo Bay Residence</h3>
+                        <p class="mansion-location">東京都港区 / 豊洲</p>
+                        <div class="mansion-details">
+                            <span class="detail-item">
+                                <span class="detail-label">築年</span>
+                                <span class="detail-value">2019年</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">デベロッパー</span>
+                                <span class="detail-value">三井不動産</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">階数</span>
+                                <span class="detail-value">48階建</span>
+                            </span>
+                        </div>
+                        <p class="mansion-description">
+                            東京湾を一望する最上級のタワーレジデンス。洗練されたモダンデザインと充実の共用施設で、都市生活の新たな価値を提案。
+                        </p>
+                    </div>
+                </article>
+
+                <!-- マンション2 -->
+                <article class="mansion-card" data-category="designer luxury">
+                    <div class="mansion-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Roppongi Hills Grand" loading="lazy">
+                        <div class="mansion-badge">デザイナーズ</div>
+                    </div>
+                    <div class="mansion-info">
+                        <h3 class="mansion-name">Roppongi Hills Grand</h3>
+                        <p class="mansion-location">東京都港区 / 六本木</p>
+                        <div class="mansion-details">
+                            <span class="detail-item">
+                                <span class="detail-label">築年</span>
+                                <span class="detail-value">2021年</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">デベロッパー</span>
+                                <span class="detail-value">森ビル</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">設計</span>
+                                <span class="detail-value">隈研吾</span>
+                            </span>
+                        </div>
+                        <p class="mansion-description">
+                            世界的建築家による芸術的なファサードデザイン。六本木の文化的景観に調和する、現代建築の傑作。
+                        </p>
+                    </div>
+                </article>
+
+                <!-- マンション3 -->
+                <article class="mansion-card" data-category="luxury">
+                    <div class="mansion-image">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ginza Premium Court" loading="lazy">
+                        <div class="mansion-badge">ラグジュアリー</div>
+                    </div>
+                    <div class="mansion-info">
+                        <h3 class="mansion-name">Ginza Premium Court</h3>
+                        <p class="mansion-location">東京都中央区 / 銀座</p>
+                        <div class="mansion-details">
+                            <span class="detail-item">
+                                <span class="detail-label">築年</span>
+                                <span class="detail-value">2020年</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">デベロッパー</span>
+                                <span class="detail-value">住友不動産</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">戸数</span>
+                                <span class="detail-value">限定38戸</span>
+                            </span>
+                        </div>
+                        <p class="mansion-description">
+                            銀座の中心に佇む限定38戸の特別なレジデンス。最高級の素材と職人技が織りなす贅沢な住空間。
+                        </p>
+                    </div>
+                </article>
+
+                <!-- マンション4 -->
+                <article class="mansion-card" data-category="vintage">
+                    <div class="mansion-image">
+                        <img src="https://images.unsplash.com/photo-1592595896616-c37162298647?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vintage Mansion Shibuya" loading="lazy">
+                        <div class="mansion-badge">ヴィンテージ</div>
+                    </div>
+                    <div class="mansion-info">
+                        <h3 class="mansion-name">Shibuya Classic Manor</h3>
+                        <p class="mansion-location">東京都渋谷区 / 代官山</p>
+                        <div class="mansion-details">
+                            <span class="detail-item">
+                                <span class="detail-label">築年</span>
+                                <span class="detail-value">1995年</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">デベロッパー</span>
+                                <span class="detail-value">東急不動産</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">特徴</span>
+                                <span class="detail-value">クラシック</span>
+                            </span>
+                        </div>
+                        <p class="mansion-description">
+                            時を重ねることで増す美しさ。代官山の閑静な環境に溶け込む、品格あるクラシックデザインの名作。
+                        </p>
+                    </div>
+                </article>
+
+                <!-- マンション5 -->
+                <article class="mansion-card" data-category="tower">
+                    <div class="mansion-image">
+                        <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Osaka Sky Tower" loading="lazy">
+                        <div class="mansion-badge">タワー</div>
+                    </div>
+                    <div class="mansion-info">
+                        <h3 class="mansion-name">Osaka Sky Tower</h3>
+                        <p class="mansion-location">大阪府大阪市 / 梅田</p>
+                        <div class="mansion-details">
+                            <span class="detail-item">
+                                <span class="detail-label">築年</span>
+                                <span class="detail-value">2022年</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">デベロッパー</span>
+                                <span class="detail-value">積水ハウス</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">階数</span>
+                                <span class="detail-value">52階建</span>
+                            </span>
+                        </div>
+                        <p class="mansion-description">
+                            大阪の新たなランドマーク。関西の空を貫く美しいシルエットと、最先端の環境技術が融合した次世代レジデンス。
+                        </p>
+                    </div>
+                </article>
+
+                <!-- マンション6 -->
+                <article class="mansion-card" data-category="designer">
+                    <div class="mansion-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kyoto Modern Residence" loading="lazy">
+                        <div class="mansion-badge">デザイナーズ</div>
+                    </div>
+                    <div class="mansion-info">
+                        <h3 class="mansion-name">Kyoto Modern Residence</h3>
+                        <p class="mansion-location">京都府京都市 / 祇園</p>
+                        <div class="mansion-details">
+                            <span class="detail-item">
+                                <span class="detail-label">築年</span>
+                                <span class="detail-value">2023年</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">デベロッパー</span>
+                                <span class="detail-value">京阪不動産</span>
+                            </span>
+                            <span class="detail-item">
+                                <span class="detail-label">設計</span>
+                                <span class="detail-value">安藤忠雄</span>
+                            </span>
+                        </div>
+                        <p class="mansion-description">
+                            古都京都の美意識と現代建築の粋が融合。伝統的な街並みに調和する、日本的モダニズムの結晶。
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特集セクション -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">特集コンテンツ</h2>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beautiful Floor Plans" loading="lazy">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">美しい間取り特集</h3>
+                        <p class="feature-description">機能性と美しさを兼ね備えた、建築家が手がける間取りデザインの世界</p>
+                        <span class="feature-status">近日公開</span>
+                    </div>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vintage Mansions" loading="lazy">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">ヴィンテージマンション特集</h3>
+                        <p class="feature-description">時代を超えて愛される、歴史と品格を纏った名作マンションたち</p>
+                        <span class="feature-status">近日公開</span>
+                    </div>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Interior Design" loading="lazy">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">インテリアデザイン特集</h3>
+                        <p class="feature-description">世界一流のデザイナーが手がける、贅沢な室内空間の美学</p>
+                        <span class="feature-status">近日公開</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About セクション -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">コンセプト</h2>
+                <p class="about-description">
+                    PREMIUM MANSIONS CATALOGは、日本全国の美しいマンションを厳選してご紹介するプラットフォームです。<br>
+                    建築の美しさ、デザインの洗練性、そして住環境の質の高さを基準に、<br>
+                    真に価値あるレジデンスのみをセレクションしています。
+                </p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <h4>厳選された美しさ</h4>
+                        <p>建築家やデザイナーの感性が光る、美的価値の高いマンションのみを掲載</p>
+                    </div>
+                    <div class="about-feature">
+                        <h4>上質な住環境</h4>
+                        <p>立地、設備、サービスすべてにおいて最高水準を満たすプレミアムレジデンス</p>
+                    </div>
+                    <div class="about-feature">
+                        <h4>時代を超える価値</h4>
+                        <p>流行に左右されない、普遍的な美しさと品格を備えた建築作品</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>PREMIUM MANSIONS CATALOG</h3>
+                    <p>日本の美しいマンション</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#mansions">マンション</a>
+                    <a href="#features">特集</a>
+                    <a href="#about">コンセプト</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Premium Mansions Catalog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
