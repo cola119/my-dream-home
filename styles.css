@@ -10,6 +10,8 @@ body {
     color: #2c3e50;
     line-height: 1.6;
     min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -1562,10 +1564,10 @@ header h1 {
 }
 
 .condition-inputs {
-    display: grid;
-    grid-template-columns: auto auto auto 1fr;
+    display: flex;
     gap: 16px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .condition-item {
@@ -1613,7 +1615,12 @@ header h1 {
 .condition-summary {
     display: flex;
     gap: 16px;
-    margin-left: auto;
+    align-items: center;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(52, 152, 219, 0.05);
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
 }
 
 .condition-value {
@@ -1985,6 +1992,12 @@ header h1 {
         gap: 16px;
     }
     
+    .condition-inputs {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+    
     .fees-grid {
         grid-template-columns: 1fr !important;
         gap: 8px;
@@ -2243,6 +2256,248 @@ header h1 {
     .prefecture-name {
         font-size: 0.8em;
         margin-bottom: 4px;
+    }
+}
+
+/* iPhone対応 - 小さな画面サイズ用 */
+@media (max-width: 420px) {
+    .container {
+        padding: 4px;
+        gap: 16px;
+    }
+    
+    header {
+        padding: 16px 12px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    .input-section,
+    .section {
+        padding: 16px;
+    }
+    
+    .input-methods {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .budget-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+    }
+    
+    .budget-btn {
+        padding: 8px 4px;
+        font-size: 0.7em;
+    }
+    
+    .payment-comparison {
+        gap: 12px;
+    }
+    
+    .payment-card {
+        padding: 12px;
+    }
+    
+    .amount-main {
+        font-size: 1.2em;
+    }
+    
+    .amount-sub {
+        font-size: 0.7em;
+    }
+    
+    .condition-inputs {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+    
+    .condition-item {
+        padding: 8px;
+    }
+    
+    .section-header h4 {
+        font-size: 1em;
+    }
+    
+    .section-subtitle {
+        font-size: 0.75em;
+    }
+    
+    .fees-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .fee-item {
+        padding: 8px 10px;
+    }
+    
+    .fee-label span {
+        font-size: 0.85em;
+    }
+    
+    .fee-label small {
+        font-size: 0.7em;
+    }
+    
+    .fee-value {
+        font-size: 0.9em;
+    }
+    
+    .maintenance-costs-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .maintenance-item {
+        padding: 8px 10px;
+    }
+    
+    .payment-details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-detail-card {
+        padding: 12px;
+    }
+    
+    .detail-row {
+        padding: 6px 0;
+    }
+    
+    .value-main {
+        font-size: 0.9em;
+    }
+    
+    .value-sub {
+        font-size: 0.7em;
+    }
+    
+    .property-links-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .property-link-card {
+        margin-bottom: 8px;
+    }
+    
+    .prefecture-link {
+        padding: 8px 12px;
+        font-size: 0.85em;
+    }
+    
+    .chart-section {
+        padding: 12px;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .chart-toggle {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    
+    .toggle-btn {
+        padding: 6px 8px;
+        font-size: 0.75em;
+        min-width: 80px;
+    }
+    
+    .sale-simulation-section {
+        padding: 16px;
+    }
+    
+    .sale-inputs {
+        grid-template-columns: 1fr;
+    }
+    
+    .sale-price-buttons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+    }
+    
+    .sale-price-btn {
+        padding: 4px 2px;
+        font-size: 0.7em;
+    }
+    
+    .sale-breakdown-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .breakdown-item {
+        padding: 8px 10px;
+    }
+    
+    .breakdown-label span {
+        font-size: 0.85em;
+    }
+    
+    .breakdown-label small {
+        font-size: 0.7em;
+    }
+    
+    .breakdown-value {
+        font-size: 0.9em;
+    }
+    
+    .sale-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .housing-type-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .housing-type-option {
+        padding: 8px;
+    }
+    
+    .housing-type-name {
+        font-size: 0.85em;
+    }
+    
+    .housing-type-limit,
+    .housing-type-period {
+        font-size: 0.75em;
+    }
+    
+    /* タッチ操作に適したボタンサイズ */
+    input[type="number"],
+    input[type="text"],
+    select {
+        min-height: 44px;
+        font-size: 16px; /* iOS でズームを防ぐため */
+        padding: 8px 12px;
+    }
+    
+    button {
+        min-height: 44px;
+        font-size: 14px;
+        padding: 8px 12px;
+        touch-action: manipulation;
+    }
+    
+    /* タップ時のハイライト無効 */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* スクロールを滑らかに */
+    html {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* 固定バー対応 */
+    .container {
+        padding-bottom: 32px;
     }
 }
 
