@@ -4,91 +4,183 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f8f9fa;
-    color: #2c3e50;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: linear-gradient(135deg, #fafbfc 0%, #f8f9fb 100%);
+    color: #1a252f;
     line-height: 1.6;
     min-height: 100vh;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 20px;
+}
+
+main {
+    padding: 0 0 4rem 0;
+}
+
+/* ===== ヒーローヘッダー ===== */
+.hero-header {
+    min-height: 35vh;
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3rem;
 }
 
-header {
+.hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(99, 125, 166, 0.1), rgba(139, 155, 180, 0.15));
+    z-index: 1;
+}
+
+.header-content {
     text-align: center;
-    padding: 32px 24px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
 }
 
-header h1 {
-    color: #2c3e50;
-    font-size: 2.2em;
-    margin-bottom: 8px;
-    font-weight: 600;
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1a252f;
+    line-height: 1.1;
+    margin-bottom: 1rem;
 }
 
-/* Section styling for clear boundaries */
+.subtitle {
+    display: block;
+    font-size: 1.8rem;
+    color: #637da6;
+    font-weight: 400;
+    margin-top: 0.3rem;
+}
+
+.header-description {
+    font-size: 1rem;
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.header-decoration {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.decoration-circle {
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgba(99, 125, 166, 0.3);
+    border-radius: 50%;
+    position: absolute;
+}
+
+.decoration-gradient {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(45deg, rgba(99, 125, 166, 0.2), rgba(139, 155, 180, 0.2));
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+/* ===== セクション基本スタイル ===== */
 .section {
     background: white;
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid rgba(99, 125, 166, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
 }
 
 .section-title {
-    color: #2c3e50;
-    font-size: 1.3em;
+    font-family: 'Playfair Display', serif;
+    color: #1a252f;
+    font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 20px;
-    padding-bottom: 12px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
     border-bottom: 2px solid #f8f9fa;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
+    position: relative;
 }
 
 .section-title::before {
     content: '';
     width: 4px;
-    height: 24px;
-    background: #3498db;
+    height: 30px;
+    background: linear-gradient(135deg, #637da6, #8b9bb4);
     border-radius: 2px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #637da6, #8b9bb4);
 }
 
 .input-section {
     background: white;
-    border-radius: 12px;
-    padding: 24px;
-    border: 2px solid #3498db;
-    box-shadow: 0 2px 12px rgba(52, 152, 219, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+    border: 2px solid rgba(99, 125, 166, 0.3);
+    box-shadow: 0 15px 50px rgba(99, 125, 166, 0.15);
     position: relative;
+    margin-bottom: 3rem;
 }
 
 .input-section::before {
     content: 'STEP 1: 購入予算を入力';
     position: absolute;
-    top: -10px;
-    left: 24px;
-    background: #495057;
+    top: -12px;
+    left: 3rem;
+    background: linear-gradient(135deg, #637da6, #8b9bb4);
     color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.75em;
-    font-weight: 500;
-    letter-spacing: 0.3px;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(99, 125, 166, 0.3);
 }
 
 
@@ -237,8 +329,9 @@ header h1 {
 .payment-comparison {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 2rem;
     align-items: start;
+    margin-bottom: 2rem;
 }
 
 /* 物件購入リンクセクション - 控えめなデザイン */
@@ -339,13 +432,19 @@ header h1 {
 }
 
 .payment-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    padding: 16px;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
     border: 2px solid transparent;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.payment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 .payment-card::before {
@@ -354,23 +453,24 @@ header h1 {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 6px;
+    border-radius: 20px 20px 0 0;
 }
 
 .variable-card {
-    border-color: rgba(52, 152, 219, 0.3);
+    border-color: rgba(99, 125, 166, 0.3);
 }
 
 .variable-card::before {
-    background: linear-gradient(90deg, #3498db, #2980b9);
+    background: linear-gradient(90deg, #637da6, #8b9bb4);
 }
 
 .fixed-card {
-    border-color: rgba(39, 174, 96, 0.3);
+    border-color: rgba(87, 92, 112, 0.3);
 }
 
 .fixed-card::before {
-    background: linear-gradient(90deg, #27ae60, #229954);
+    background: linear-gradient(90deg, #575c70, #8a8fa3);
 }
 
 
@@ -533,87 +633,109 @@ header h1 {
 
 .chart-section {
     background: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 24px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(99, 125, 166, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.chart-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
 }
 
 .chart-section::before {
     content: '📊 返済総額推移比較';
     position: absolute;
-    top: -10px;
-    left: 24px;
-    background: #495057;
+    top: -12px;
+    left: 2.5rem;
+    background: linear-gradient(135deg, #637da6, #8b9bb4);
     color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.75em;
-    font-weight: 500;
-    letter-spacing: 0.3px;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(99, 125, 166, 0.3);
 }
 
 .chart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #e0e6ed;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f8f9fa;
 }
 
 .chart-header h3 {
-    color: #2c3e50;
-    font-size: 1.2em;
+    font-family: 'Playfair Display', serif;
+    color: #1a252f;
+    font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
 }
 
 .chart-toggle {
     display: flex;
-    gap: 8px;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .toggle-btn {
-    padding: 6px 12px;
-    border: 2px solid #e0e6ed;
-    border-radius: 6px;
+    padding: 10px 18px;
+    border: 2px solid rgba(99, 125, 166, 0.3);
+    border-radius: 20px;
     background: white;
-    color: #2c3e50;
-    font-size: 0.85em;
+    color: #1a252f;
+    font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .toggle-btn:hover {
-    border-color: #3498db;
-    background: rgba(52, 152, 219, 0.05);
+    border-color: #637da6;
+    background: rgba(99, 125, 166, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 125, 166, 0.2);
 }
 
 .toggle-btn.active {
-    border-color: #3498db;
-    background: #3498db;
+    border-color: #637da6;
+    background: linear-gradient(135deg, #637da6, #8b9bb4);
     color: white;
+    font-weight: 600;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(99, 125, 166, 0.3);
 }
 
 .chart-container {
     text-align: center;
+    padding: 1.5rem;
+    background: #fafbfc;
+    border-radius: 15px;
+    border: 1px solid rgba(99, 125, 166, 0.1);
 }
 
 #assetChart {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    background: white;
+    padding: 1rem;
 }
 
 .comparison-table {
     overflow-x: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    background: white;
 }
 
 .comparison-table table {
@@ -624,12 +746,13 @@ header h1 {
 }
 
 .comparison-table th {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: linear-gradient(135deg, #637da6, #8b9bb4);
     color: white;
-    padding: 12px 8px;
+    padding: 15px 12px;
     text-align: center;
     font-weight: 600;
-    font-size: 0.85em;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
 
 .comparison-table td {
@@ -1189,28 +1312,34 @@ header h1 {
 }
 
 .budget-btn {
-    padding: 6px 10px;
-    border: 2px solid #e0e6ed;
-    border-radius: 16px;
+    padding: 10px 20px;
+    border: 2px solid rgba(99, 125, 166, 0.3);
+    border-radius: 25px;
     background: #fff;
-    color: #2c3e50;
-    font-size: 0.75em;
+    color: #1a252f;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
     text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .budget-btn:hover {
-    border-color: #3498db;
-    background: rgba(52, 152, 219, 0.05);
+    border-color: #637da6;
+    background: rgba(99, 125, 166, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(99, 125, 166, 0.2);
 }
 
 .budget-btn.active {
-    border-color: #3498db;
-    background: #3498db;
+    border-color: #637da6;
+    background: linear-gradient(135deg, #637da6, #8b9bb4);
     color: white;
+    font-weight: 600;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(99, 125, 166, 0.3);
 }
 
 .monthly-input-group {
@@ -2076,15 +2205,29 @@ header h1 {
 
 @media (max-width: 768px) {
     .container {
-        padding: 8px;
+        padding: 0 15px;
     }
     
-    header {
-        padding: 20px 0;
+    .hero-header {
+        min-height: 30vh;
+        padding: 2rem 1rem;
+        margin-bottom: 1.5rem;
     }
     
-    header h1 {
-        font-size: 1.8em;
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .header-description {
+        font-size: 1rem;
+    }
+    
+    .header-decoration {
+        display: none;
     }
     
     .input-section,
